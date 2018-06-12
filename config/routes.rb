@@ -6,7 +6,8 @@ Rails.application.routes.draw do
       resources :users
 
       get '/current_user', to: 'authentications#show'
-      post '/login', to: 'authentications#create'
+      post '/login', to: 'authentications#login'
+      post '/sign_up', to: 'authentications#create'
       # post '/login', to: 'users#create'
     end
   end

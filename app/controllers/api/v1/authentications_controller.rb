@@ -12,15 +12,25 @@
 
 
 class Api::V1::AuthenticationsController < ApplicationController
-  skip_before_action :authorized, only: [:create, :show]
+  skip_before_action :authorized, only: [:login, :create, :show]
 
-  def create
+  def login
     user = User.find_by(email: params[:email])
 
     if user && user.authenticate(params[:password])
       render json: {id: user.id, name: user.name, email: user.email, guru: user.guru, project: user.project, token: generate_token({id: user.id})}
     else
       render({json: {error: 'User is invalid'}, status: 401})
+    end
+  end
+
+  def create
+    user = User.create(name: params[:name], email: params[:email], password: params[:password])
+  
+    if user && user.authenticate(params[:password])
+      render json: {id: user.id, name: user.name, email: user.email, guru: user.guru, project: user.project, token: generate_token({id: user.id})}
+    else
+      render({json: {error: 'Sign Up Failed Personal Message'}, status: 401})
     end
   end
 
