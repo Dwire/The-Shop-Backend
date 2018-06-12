@@ -4,8 +4,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :posts
       resources :users
-      
-      post '/login', to: "sessions#create"
+
+      get '/current_user', to: 'authentications#show'
+      post '/login', to: 'authentications#create'
+      # post '/login', to: 'users#create'
     end
   end
 end
