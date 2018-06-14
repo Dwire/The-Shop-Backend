@@ -26,7 +26,7 @@ class Api::V1::AuthenticationsController < ApplicationController
 
   def create
     user = User.create(name: params[:name], email: params[:email], password: params[:password])
-  
+
     if user && user.authenticate(params[:password])
       render json: {id: user.id, name: user.name, email: user.email, guru: user.guru, project: user.project, token: generate_token({id: user.id})}
     else
@@ -50,7 +50,7 @@ class Api::V1::AuthenticationsController < ApplicationController
   # token = request.headers['Authorization']
   # user = User.find_by(id: token)
   if logged_in?
-    render json: { id: current_user.id, name: current_user.name, email: current_user.email }
+    render json: { id: current_user.id, name: current_user.name, email: current_user.email, guru: current_user.guru, project: current_user.project }
   else
     render json: {error: 'No user could be found'}, status: 401
   end
