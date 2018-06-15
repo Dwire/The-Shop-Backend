@@ -3,8 +3,13 @@ class Api::V1::UsersController < ApplicationController
 
   def index
     users = User.all
-    render json: users, status: 200
+    if logged_in?
+      render json: users, status: 200
+    else
+      render json: {error: 'No user could be found'}, status: 401
+    end
   end
+
 
   def create
     @user = User.create(user_params)
