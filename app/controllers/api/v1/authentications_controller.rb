@@ -12,7 +12,7 @@
 
 
 class Api::V1::AuthenticationsController < ApplicationController
-  skip_before_action :authorized, only: [:login, :create, :show]
+  skip_before_action :authorized, only: [:login, :create]
 
   def login
     user = User.find_by(email: params[:email])
