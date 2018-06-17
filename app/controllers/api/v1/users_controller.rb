@@ -20,14 +20,16 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  # def update
-  #   @hobbit = Hobbit.find(params[:id])
-  #   if @hobbit.update(hobbit_params)
-  #     render json: @hobbit, status: 200
-  #   else
-  #     render json: {message: "Couldn't update your hob's job"}, status: 401
-  #   end
-  # end
+  def update
+    # @user = User.find(params[:id])
+    if logged_in?
+      if @user.update(user_params)
+        render json: @user, status: 200
+      else
+        render json: {message: "Couldn't update your profile"}, status: 401
+      end
+    end
+  end
 
   def show
     render json: @user, status: 200
@@ -38,7 +40,7 @@ class Api::V1::UsersController < ApplicationController
 
   private
   def user_params
-    params.permit(:name, :email, :project, :guru, :password)
+    params.permit(:id, :name, :email, :project, :guru, :password)
   end
 
   def set_user
