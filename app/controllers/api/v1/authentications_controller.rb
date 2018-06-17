@@ -25,7 +25,7 @@ class Api::V1::AuthenticationsController < ApplicationController
   end
 
   def create
-    user = User.create(name: params[:name], email: params[:email], password: params[:password])
+    user = User.create(name: params[:name], email: params[:email], password: params[:password], latitude: params[:latitude], longitude: params[:longitude])
 
     if user && user.authenticate(params[:password])
       render json: {id: user.id, name: user.name, email: user.email, guru: user.guru, project: user.project, token: generate_token({id: user.id})}

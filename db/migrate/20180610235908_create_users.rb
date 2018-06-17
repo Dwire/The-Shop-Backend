@@ -6,6 +6,8 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :password_digest
       t.string :guru
       t.string :project
+      t.float :longitude
+      t.float :latitude
 
       t.timestamps
     end

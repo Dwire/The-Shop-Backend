@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :set_user, only: [:show]
+  # before_action :set_user, only: [:show]
 
   def index
     users = User.all
@@ -11,14 +11,14 @@ class Api::V1::UsersController < ApplicationController
   end
 
 
-  def create
-    @user = User.create(user_params)
-    if @user
-      render json: @user, status: 201
-    else
-      render json: {message: "Couldn't update your hob's job"}, status: 401
-    end
-  end
+  # def create
+  #   @user = User.create(user_params)
+  #   if @user
+  #     render json: @user, status: 201
+  #   else
+  #     render json: {message: "Couldn't update your hob's job"}, status: 401
+  #   end
+  # end
 
   def update
     # @user = User.find(params[:id])
@@ -31,16 +31,16 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def show
-    render json: @user, status: 200
-  end
+  # def show
+  #   render json: @user, status: 200
+  # end
 
   # def update
   # end
 
   private
   def user_params
-    params.permit(:id, :name, :email, :project, :guru, :password)
+    params.permit(:id, :name, :email, :project, :guru, :password, :latitude, :longitude,)
   end
 
   def set_user
