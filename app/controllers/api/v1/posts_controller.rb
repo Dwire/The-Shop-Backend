@@ -6,10 +6,14 @@ class Api::V1::PostsController < ApplicationController
     render json: posts, status: 200
   end
 
-  # def create
-  #   post = Post.create(post_params)
-  #   render json: post, status: 201
-  # end
+  def create
+    post = Post.create(post_params)
+    if (post && logged_in?)
+      render json: post, status: 201
+    else
+      render json: {error: 'No user could be created'}, status: 401
+    end
+  end
 
   def show
     render json: @post, status: 200
@@ -28,5 +32,4 @@ class Api::V1::PostsController < ApplicationController
   def set_post
     @post = Post.find(params[:id])
   end
-end
 end
