@@ -8,8 +8,9 @@ class Api::V1::PostsController < ApplicationController
 
   def create
     post = Post.create(post_params)
+    users = User.all
     if (post && logged_in?)
-      render json: post, status: 201
+      render json: users, status: 201
     else
       render json: {error: 'No user could be created'}, status: 401
     end
